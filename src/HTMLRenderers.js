@@ -103,7 +103,7 @@ export function ul(htmlAttribs, children, convertedCSSStyles, passProps = {}) {
                   height: baseFontSize / 2.8,
                   marginTop: baseFontSize / 2,
                   borderRadius: baseFontSize / 2.8,
-                  backgroundColor: 'black'
+                  backgroundColor: 'white'
                 }}
               />
             );
@@ -172,7 +172,7 @@ export function iframe(htmlAttribs, children, convertedCSSStyles, passProps) {
     <WebView
       key={passProps.key}
       source={source}
-      style={[style, { marginLeft: -15 }]}
+      style={[style, { marginLeft: -15, opacity: 0.99 }]}
     />
   );
 }
