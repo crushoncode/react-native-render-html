@@ -1,10 +1,8 @@
 import React from 'react';
-import { TouchableOpacity, Text, View, Platform } from 'react-native';
+import { TouchableOpacity, Text, View, Platform, WebView } from 'react-native';
 import { _constructStyles, _getElementClassStyles } from './HTMLStyles';
 import HTMLImage from './HTMLImage';
 import TouchableCard from '../../../src/components/TouchableCard';
-
-import WebView from 'react-native-android-fullscreen-webview-video';
 
 export function a(htmlAttribs, children, convertedCSSStyles, passProps) {
   const style = _constructStyles({
@@ -174,7 +172,7 @@ export function iframe(htmlAttribs, children, convertedCSSStyles, passProps) {
     <WebView
       key={passProps.key}
       source={source}
-      style={[style, { marginLeft: -15, opacity: 0.99 }]}
+      style={[style, { opacity: 0.99, alignSelf: 'center' }]}
     />
   );
 }
