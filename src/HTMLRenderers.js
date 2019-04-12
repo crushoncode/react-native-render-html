@@ -1,5 +1,12 @@
 import React from 'react';
-import { TouchableOpacity, Text, View, Platform, WebView } from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  View,
+  Platform,
+  WebView,
+  Dimensions
+} from 'react-native';
 import { _constructStyles, _getElementClassStyles } from './HTMLStyles';
 import HTMLImage from './HTMLImage';
 import TouchableCard from '../../../src/components/TouchableCard';
@@ -46,9 +53,10 @@ export function img(htmlAttribs, children, convertedCSSStyles, passProps = {}) {
     styleSet: 'IMAGE'
   });
   const { src, alt, width, height } = htmlAttribs;
+
   return (
     <HTMLImage
-      source={{ uri: src }}
+      source={{ uri: `${src}?w=${Dimensions.get('window').width}` }}
       alt={alt}
       width={width}
       height={height}
@@ -101,9 +109,9 @@ export function ul(htmlAttribs, children, convertedCSSStyles, passProps = {}) {
                   marginRight: 10,
                   width: baseFontSize / 2.8,
                   height: baseFontSize / 2.8,
-                  marginTop: baseFontSize / 2,
+                  marginTop: baseFontSize / 1.3,
                   borderRadius: baseFontSize / 2.8,
-                  backgroundColor: 'white'
+                  backgroundColor: '#888C9C'
                 }}
               />
             );
@@ -140,21 +148,29 @@ export function ul(htmlAttribs, children, convertedCSSStyles, passProps = {}) {
 export const ol = ul;
 
 export function iframe(htmlAttribs, children, convertedCSSStyles, passProps) {
-  const { staticContentMaxWidth, tagsStyles, classesStyles } = passProps;
+  // const { staticContentMaxWidth, tagsStyles, classesStyles } = passProps;
 
-  const tagStyleHeight = tagsStyles.iframe && tagsStyles.iframe.height;
-  const tagStyleWidth = tagsStyles.iframe && tagsStyles.iframe.width;
+  // const tagStyleHeight = tagsStyles.iframe && tagsStyles.iframe.height;
+  // const tagStyleWidth = tagsStyles.iframe && tagsStyles.iframe.width;
 
-  const classStyles = _getElementClassStyles(htmlAttribs, classesStyles);
-  const classStyleWidth = classStyles.width;
-  const classStyleHeight = classStyles.height;
+  // const classStyles = _getElementClassStyles(htmlAttribs, classesStyles);
+  // const classStyleWidth = classStyles.width;
+  // const classStyleHeight = classStyles.height;
 
-  const attrHeight = htmlAttribs.height ? parseInt(htmlAttribs.height) : false;
-  const attrWidth = htmlAttribs.width ? parseInt(htmlAttribs.width) : false;
+  // const attrHeight = htmlAttribs.height ? parseInt(htmlAttribs.height) : false;
+  // const attrWidth = htmlAttribs.width ? parseInt(htmlAttribs.width) : false;
 
-  const height = attrHeight || classStyleHeight || tagStyleHeight || 200;
-  const width =
-    attrWidth || classStyleWidth || tagStyleWidth || staticContentMaxWidth;
+  // const height = `${htmlAttribs}?w=${Dimensions.get('window').height}`;
+  // const height = attrHeight || classStyleHeight || tagStyleHeight || 225;
+  // const width =
+  //   attrWidth || classStyleWidth || tagStyleWidth || staticContentMaxWidth;
+
+  const screenWidth = Math.round(Dimensions.get('window').width);
+  const width = screenWidth - 30;
+  const ratio = 1.78;
+  const height = width / ratio;
+
+  // 1.78 youtube ratio 16/9
 
   const style = _constructStyles({
     tagName: 'iframe',
@@ -164,9 +180,17 @@ export function iframe(htmlAttribs, children, convertedCSSStyles, passProps) {
     additionalStyles: [{ height, width }]
   });
 
+  const formatWebsiteURL = (website) => {
+    if (!website.toString().includes('https:')) {
+      return `https:${website}`;
+    } else {
+      return website;
+    }
+  };
+
   const source = htmlAttribs.srcdoc
-    ? { html: htmlAttribs.srcdoc }
-    : { uri: htmlAttribs.src };
+    ? { html: formatWebsiteURL(htmlAttribs.srcdoc) }
+    : { uri: formatWebsiteURL(htmlAttribs.src) };
 
   return (
     <WebView
@@ -195,7 +219,7 @@ export function br(htlmAttribs, children, convertedCSSStyles, passProps) {
       style={{ height: 1.2 * passProps.emSize, flex: 1 }}
       key={passProps.key}
     >
-      {'\n'}
+      {/* {'\n'} */}
     </Text>
   );
 }
@@ -206,15 +230,24 @@ export function blockquote(
   convertedCSSStyles,
   passProps
 ) {
-  console.log(children);
+  // console.log(children);
+
   return children.map((child) => {
+    console.log(child);
+
+    const linkTitle =
+      child[0].props.children[1][0][0].props.rawChildren[0].data;
+    const linkUrl =
+      child[0].props.children[1][0][0].props.rawChildren[0].parent.attribs.href;
+
     return (
       <TouchableCard
-        linkTitle={child[0].props.children[1][0][0].props.rawChildren[0].data}
-        websiteLink={
-          child[0].props.children[1][0][0].props.rawChildren[0].parent.attribs
-            .href
+        linkTitle={
+          child[0].props.children[1][0][0].props.rawChildren[0]
+            ? linkTitle
+            : linkUrl
         }
+        websiteLink={linkUrl}
       />
     );
   });

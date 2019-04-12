@@ -1,27 +1,31 @@
 {
-  "_from": "react-native-render-html@^4.1.1",
-  "_id": "react-native-render-html@4.1.1",
+  "_args": [
+    [
+      "git+https://github.com/crushoncode/react-native-render-html.git",
+      "/Users/serinako/0dreamwalk/appPjt/tweddle"
+    ]
+  ],
+  "_from": "git+https://github.com/crushoncode/react-native-render-html.git",
+  "_id": "react-native-render-html@git+https://github.com/crushoncode/react-native-render-html.git#3ec98b3490c48cbbff0e93b67fa92e84c106c073",
   "_inBundle": false,
-  "_integrity": "sha512-gIe2kmEGVy0uDJ8cpKFAmory6p23YSN41yvT1vZAV0gS58yxwSb9c2XSWw8qSNfg97raQgTyYT5xgCVgwncumw==",
+  "_integrity": "",
   "_location": "/react-native-render-html",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
-    "registry": true,
-    "raw": "react-native-render-html@^4.1.1",
-    "name": "react-native-render-html",
-    "escapedName": "react-native-render-html",
-    "rawSpec": "^4.1.1",
-    "saveSpec": null,
-    "fetchSpec": "^4.1.1"
+    "type": "git",
+    "raw": "git+https://github.com/crushoncode/react-native-render-html.git",
+    "rawSpec": "git+https://github.com/crushoncode/react-native-render-html.git",
+    "saveSpec": "git+https://github.com/crushoncode/react-native-render-html.git",
+    "fetchSpec": "https://github.com/crushoncode/react-native-render-html.git",
+    "gitCommittish": null
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/react-native-render-html/-/react-native-render-html-4.1.1.tgz",
+  "_resolved": "git+https://github.com/crushoncode/react-native-render-html.git#3ec98b3490c48cbbff0e93b67fa92e84c106c073",
   "_shasum": "944c21225ec6d22395bf1d6143fa8ef35d3fa28f",
-  "_spec": "react-native-render-html@^4.1.1",
-  "_where": "/Users/serinako/apps/dreamwalk/appPjt/tweddle",
+  "_spec": "git+https://github.com/crushoncode/react-native-render-html.git",
+  "_where": "/Users/serinako/0dreamwalk/appPjt/tweddle",
   "author": {
     "name": "Archriss"
   },
