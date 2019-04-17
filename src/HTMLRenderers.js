@@ -4,12 +4,13 @@ import {
   Text,
   View,
   Platform,
-  WebView,
   Dimensions
 } from 'react-native';
 import { _constructStyles, _getElementClassStyles } from './HTMLStyles';
 import HTMLImage from './HTMLImage';
 import TouchableCard from '../../../src/components/TouchableCard';
+
+import WebView from 'react-native-android-fullscreen-webview-video';
 
 export function a(htmlAttribs, children, convertedCSSStyles, passProps) {
   const style = _constructStyles({
