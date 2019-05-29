@@ -236,21 +236,37 @@ export function blockquote(
   return children.map((child) => {
     console.log(child);
 
-    const linkTitle =
-      child[0].props.children[1][0][0].props.rawChildren[0].data;
-    const linkUrl =
-      child[0].props.children[1][0][0].props.rawChildren[0].parent.attribs.href;
+    if (
+      child[0] &&
+      child[0].props &&
+      child[0].props.children[1] &&
+      child[0].props.children[1][0] &&
+      child[0].props.children[1][0][0] &&
+      child[0].props.children[1][0][0].props &&
+      child[0].props.children[1][0][0].props.rawChildren &&
+      child[0].props.children[1][0][0].props.rawChildren[0]
+    ) {
+      const linkTitle =
+        child[0].props.children[1][0][0].props.rawChildren[0].data;
+      const linkUrl =
+        child[0].props.children[1][0][0].props.rawChildren[0].parent.attribs
+          .href;
 
-    return (
-      <TouchableCard
-        linkTitle={
-          child[0].props.children[1][0][0].props.rawChildren[0]
-            ? linkTitle
-            : linkUrl
-        }
-        websiteLink={linkUrl}
-      />
-    );
+      if (linkTitle && linkUrl) {
+        return (
+          <TouchableCard
+            linkTitle={
+              child[0].props.children[1][0][0].props.rawChildren[0]
+                ? linkTitle
+                : linkUrl
+            }
+            websiteLink={linkUrl}
+          />
+        );
+      } else {
+        null;
+      }
+    }
   });
 }
 
